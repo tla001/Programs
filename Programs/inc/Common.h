@@ -15,9 +15,13 @@ extern "C" {
 
 }
 #include <iostream>
+#include <iomanip>
 #include <string>
 #include <cstring>
 #include <vector>
+#include <set>
+#include <algorithm>
+#include <map>
 
 using namespace std;
 using namespace __gnu_cxx;
