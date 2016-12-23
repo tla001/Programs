@@ -813,4 +813,298 @@ public:
 		}
 	}
 };
+class Q24 {
+public:
+	static void test() {
+		int n = 0;
+		int num = 0;
+		int max = 0, min = 65535;			//max记录相邻间差值的最大值，min记录去除一个之后相邻差值最小值
+		int pre, ppre;
+		int res;
+		while (cin >> n) {
+			for (int i = 0; i < n; i++) {
+				cin >> num;
+				if (i > 0) {
+					max = max > (num - pre) ? max : (num - pre);
+					ppre = pre;
+				}
+				if (i > 1) {
+					min = min < (num - ppre) ? min : (num - ppre);
+				}
+				pre = num;
+			}
+			res = min < max ? max : min;
+			cout << res << endl;
+		}
+	}
+
+};
+class Q25 {
+public:
+	static void test() {
+		int p, q, l, r;
+		while (cin >> p >> q >> l >> r) {
+			vector<pair<int, int>> A(p);
+			vector<pair<int, int>> B(q);
+			for (int i = 0; i < p; i++) {
+				cin >> A[i].first >> A[i].second;
+			}
+			for (int i = 0; i < q; i++) {
+				cin >> B[i].first >> B[i].second;
+			}
+			int num = 0;
+			int flag = 0;
+			for (int k = l; k <= r; k++) {
+				for (int i = 0; i < q; i++) {
+					for (int j = 0; j < p; j++) {
+						if ((B[i].first + k <= A[j].second)
+								&& (B[i].second + k >= A[j].first)) {
+							num++;
+							flag = 1;
+//							cout << "num= " << num << endl;
+//							cout << "j= " << j << endl;
+							break;
+						}
+					}
+					if (flag) {
+						//flag = 0;
+						//cout << "i= " << i << endl;
+						break;
+					}
+				}
+				if (flag) {
+					flag = 0;
+					//cout << "k= " << k << endl;
+					continue;
+				}
+			}
+			cout << num << endl;
+		}
+	}
+};
+class Q26 {
+public:
+	static void test() {
+		int p, n;
+		while (cin >> p >> n) {
+			int flag = 0;
+			map<int, int> m;
+			int x, y;
+			if (n > 0) {
+				for (int i = 0; i < n; i++) {
+					cin >> x;
+					y = x % p;
+					if (flag == 0) {
+						if (m.find(y) == m.end()) {
+							m.insert(make_pair(y, 1));
+						} else {
+							cout << i + 1 << endl;
+							flag = 1;
+							//break;
+						}
+					}
+				}
+				if (flag == 0)
+					cout << -1 << endl;
+			} else {
+				cout << -1 << endl;
+			}
+
+		}
+	}
+};
+class Q27 {
+public:
+	static bool identify(const string &str) {
+		int len = str.size();
+		if (len % 2 == 0) {
+			for (int i = len / 2 - 1; i >= 0; i--) {
+				if (str[i] != str[len - i - 1]) {
+					return false;
+				}
+			}
+		} else {
+			for (int i = (len - 1) / 2 - 1; i >= 0; i--) {
+				if (str[i] != str[len - i - 1]) {
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+
+	static void test() {
+		string str;
+		while (cin >> str) {
+			int flag = 0;
+			string tem = str;
+			int len = str.size();
+			for (int i = 0; i <= len; i++) {
+				char ch = str[len - i - 1];
+				if (i == len)
+					ch = str[0];
+				str.insert(i, &ch, 1);
+//				for (int i = 0; i < str.size(); i++) {
+//					cout << str[i] << "\t";
+//				}
+//				cout << endl;
+//				cout << "str " << i << " " << str << endl;
+				if (identify(str)) {
+					cout << "YES" << endl;
+					flag = 1;
+					break;
+				}
+				str = tem;
+			}
+			if (!flag) {
+				cout << "NO" << endl;
+			}
+		}
+	}
+};
+class Q28 {
+public:
+	static void test() {
+		int n;
+		while (cin >> n) {
+			if (n > 1000)
+				n = 1000;
+			char *data = new char[n];
+			memset(data, 0, n * sizeof(char));
+//			for (int i = 0; i < n; i++)
+//				cout << (int) data[i] << "\t";
+			int size = n;
+			int pos = 1;
+			int res;
+			for (int i = 0;;) {
+				if (data[i] == 0) {
+					pos++;
+//					cout << i << "\t";
+				}
+
+				if (pos % 4 == 0) {
+					pos = 1;
+					data[i] = 1;
+					//cout << i << "\t";
+					size--;
+					if (size == 0) {
+						res = i;
+						break;
+					}
+				}
+				i++;
+				if (i == n)
+					i = 0;
+			}
+			cout << res << endl;
+			delete[] data;
+		}
+	}
+
+};
+class Q29 {
+public:
+	static void QuickSort(char a[], int left, int right) {
+		if (left > right)
+			return;
+		char proKey = a[left];
+		int i, j;
+		i = left;
+		j = right;
+		while (i != j) {
+			while (a[j] >= proKey && j > i) {
+				j--;
+			}
+			while (a[i] <= proKey && i < j) {
+				i++;
+			}
+			if (i < j) {
+				char temp = a[i];
+				a[i] = a[j];
+				a[j] = temp;
+			}
+		}
+		a[left] = a[i];
+		a[i] = proKey;
+		//显示排序轨迹
+		//PrintQuickSort(a, 10, i);
+		QuickSort(a, left, i - 1);
+		QuickSort(a, i + 1, right);
+	}
+	//统计字符串中不同字符的个数
+	static void test1() {
+		string str;
+		while (cin >> str) {
+			char *ss = new char[str.size() + 1];
+			memcpy(ss, str.c_str(), str.size());
+			ss[str.size()] = '\0';
+			//cout << "src :" << ss << endl;
+			QuickSort(ss, 0, str.size() - 1);
+			//cout << ss << endl;
+			char pre = ss[0];
+			char cur = ss[1];
+			int nums = 1;
+			for (int i = 1; i < str.size(); i++) {
+				cur = ss[i];
+				if (cur != pre)
+					nums++;
+				pre = cur;
+			}
+			cout << nums << endl;
+			delete[] ss;
+		}
+	}
+	static void test2() {
+		char data[101] = { '\0' };
+		char in;
+		int size = 0;
+		int flag = 0;
+		while ((in = cin.get())) {
+			if (in != '\n') {
+				for (int i = 0; i < size; i++) {
+					if (in == data[i]) {
+						flag = 1;
+						break;
+					}
+				}
+				if (!flag) {
+					data[size] = in;
+					size++;
+				}
+				flag = 0;
+			} else {
+				cout << data << endl;
+				memset(data, 0, size + 1);
+				size = 0;
+			}
+		}
+	}
+	static void test() {
+		string str;
+		char in;
+		int flag = 0;
+		while (cin >> str) {
+			for (int j = 0; j < str.size(); j++) {
+				in = str[j];
+				for (int i = 0; i < j; i++) {
+					if (in == str[i]) {
+						flag = 1;
+						break;
+					}
+				}
+				if (!flag) {
+					cout << str[j];
+				}
+				flag = 0;
+			}
+			cout << endl;
+		}
+	}
+};
+class Q30 {
+public:
+	static void test() {
+
+	}
+};
 #endif /* PRGRAMPAGE1_H_ */

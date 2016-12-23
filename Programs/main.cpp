@@ -22,7 +22,14 @@ int main() {
 //	Q20::test();
 //	Q21::test();
 //	Q22::test();
-	Q23::test();
+//	Q23::test();
+//	Q24::test();
+//	Q25::test();
+//	Q26::test();
+//	Q27::test();
+//	Q28::test();
+//	Q29::test();
+	Q30::test();
 	return 0;
 }
 
