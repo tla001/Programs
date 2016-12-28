@@ -5,8 +5,10 @@
  *      Author: tla001
  */
 //#include "Common.h"
-#include "PrgramPage1.h"
-
+//#include "PrgramPage1.h"
+//#include "ProgramPage2.h"
+#include "ProgramPage3.h"
+//#include <thread>
 int main() {
 	//Q2::test();
 	//Q8::test();
@@ -29,7 +31,30 @@ int main() {
 //	Q27::test();
 //	Q28::test();
 //	Q29::test();
-	Q30::test();
+//	Q30::test();
+//	Q31::test();
+//	Q32::test();
+//	Q33::test();
+//	Q34::test();
+//	Q36::test();
+//	Q37::test();
+//	Q38::test();
+	Q41::test();
 	return 0;
 }
 
+//void first_procedure() {
+//	std::cout << "First procedure output." << std::endl;
+//}
+//
+//void second_procedure() {
+//	std::cout << "Second procedure output." << std::endl;
+//}
+//
+//int main() {
+//	std::thread first_thread(first_procedure);
+////	std::thread second_thread(second_procedure);
+//	first_thread.join();
+////	second_thread.join();
+//	return 0;
+//}
