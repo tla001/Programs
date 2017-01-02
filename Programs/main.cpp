@@ -39,7 +39,10 @@ int main() {
 //	Q36::test();
 //	Q37::test();
 //	Q38::test();
-	Q41::test();
+//	Q41::test();
+//	Q42::test();
+//	Q43::test();
+	Q44::test();
 	return 0;
 }
 
